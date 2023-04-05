@@ -1,15 +1,14 @@
 import React from 'react';
 import { Contact, Button } from './ContactList.styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/contactSlice';
+
+
+import { deleteContactThunk } from '../../redux/operations/contactsThunk';
+import { getFilteredContacts } from '../../redux/selectors/selectors';
 
 function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => {
-    return state.contacts.items.filter(item =>
-      item.name.toLowerCase().trim().includes(state.filter.toLowerCase().trim())
-    );
-  });
+  const contacts = useSelector(getFilteredContacts);
 
   return (
     <ul>
@@ -17,7 +16,7 @@ function ContactList() {
         return (
           <Contact key={id}>
             {name} - {number}
-            <Button onClick={() => dispatch(deleteContact(id))}>Delete</Button>
+            <Button onClick={() => dispatch(deleteContactThunk(id))}>Delete</Button>
           </Contact>
         );
       })}

@@ -2,9 +2,10 @@ import { Forma, Label, Text, Buttons } from './ContactForm.styles';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, clearContact } from 'redux/contactSlice';
-import { nanoid } from 'nanoid';
+// import { addContact, clearContact } from 'redux/contactSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+
+import { addContactThunk } from 'redux/operations/contactsThunk';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -18,14 +19,14 @@ const ContactForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     contacts.some(item => item.name.toLowerCase() === values.name.toLowerCase())
       ? Report.warning(`${values.name}`, 'Such a name already exists!', 'OK')
-      : dispatch(addContact({ ...values, id: nanoid() }));
+      : dispatch(addContactThunk({ ...values }));
 
     resetForm();
   };
 
-  const clearSubmit = () => {
-    dispatch(clearContact());
-  };
+  // const clearSubmit = () => {
+  //   dispatch(clearContact());
+  // };
 
   const initialValues = {
     name: '',
@@ -64,9 +65,9 @@ const ContactForm = () => {
         </Label>
 
         <Buttons type="submit">Add contact</Buttons>
-        <Buttons onClick={clearSubmit} type="button">
+        {/* <Buttons onClick={clearSubmit} type="button">
           Clear
-        </Buttons>
+        </Buttons> */}
       </Forma>
     </Formik>
   );
