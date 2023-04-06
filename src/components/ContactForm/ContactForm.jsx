@@ -2,10 +2,9 @@ import { Forma, Label, Text, Buttons } from './ContactForm.styles';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addContact, clearContact } from 'redux/contactSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
-import { addContactThunk, deleteAllThunk } from 'redux/operations/contactsThunk';
+import { addContactThunk } from 'redux/operations/contactsThunk';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -22,10 +21,6 @@ const ContactForm = () => {
       : dispatch(addContactThunk({ ...values }));
 
     resetForm();
-  };
-
-  const clearSubmit = () => {
-    dispatch(deleteAllThunk());
   };
 
   const initialValues = {
@@ -65,9 +60,6 @@ const ContactForm = () => {
         </Label>
 
         <Buttons type="submit">Add contact</Buttons>
-        {/* <Buttons onClick={clearSubmit} type="button">
-          Clear
-        </Buttons> */}
       </Forma>
     </Formik>
   );

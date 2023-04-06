@@ -3,7 +3,6 @@ import {
   addContactThunk,
   deleteContactThunk,
   getContactsThunk,
-  deleteAllThunk
 } from './operations/contactsThunk';
 
 const contactsInitialState = { items: [], error: null, isLoading: false };
@@ -38,20 +37,6 @@ const contactSlice = createSlice({
         state.error = action.payload;
         state.isLoading = false;
       })
-      .addCase(deleteAllThunk.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(deleteAllThunk.fulfilled, (state, action) => {
-        state.items = [];
-        state.error = null;
-        state.isLoading = false;
-      })
-      .addCase(deleteAllThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
-      })
-
-
       .addCase(addContactThunk.pending, state => {
         state.isLoading = true;
       })
