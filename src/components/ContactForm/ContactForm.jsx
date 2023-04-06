@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { addContact, clearContact } from 'redux/contactSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
-import { addContactThunk } from 'redux/operations/contactsThunk';
+import { addContactThunk, deleteAllThunk } from 'redux/operations/contactsThunk';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -24,9 +24,9 @@ const ContactForm = () => {
     resetForm();
   };
 
-  // const clearSubmit = () => {
-  //   dispatch(clearContact());
-  // };
+  const clearSubmit = () => {
+    dispatch(deleteAllThunk());
+  };
 
   const initialValues = {
     name: '',
