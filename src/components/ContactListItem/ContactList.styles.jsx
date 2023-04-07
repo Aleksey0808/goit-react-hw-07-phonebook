@@ -8,13 +8,13 @@ export const Contact = styled.li`
   font-size: 18px;
   line-height: 36px;
   letter-spacing: 0.06em;
-  margin-bottom: 5px;
-  width: 350px;
+  margin-bottom: 10px;
+  width: 550px;
 `;
 
 export const Button = styled.button`
-  width: 80px;
-  height: 25px;
+  width: 90px;
+  height: 30px;
   border: 1px solid #000000;
   border-radius: 5px;
   background: #ffffff;
